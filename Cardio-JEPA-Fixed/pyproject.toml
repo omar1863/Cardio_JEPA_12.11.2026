@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cardio-jepa"
+version = "0.1.0"
+description = "Latent forward-prediction JEPA for cardiac world modelling from ECG"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.22",
+    "scipy>=1.9",
+    "scikit-learn>=1.1",
+    "pandas>=1.5",
+]
+
+[project.optional-dependencies]
+# h5py is needed only for CODE-15 (HDF5); wfdb is optional -- the bundled
+# dependency-free reader covers every format these databases use.
+data = ["h5py>=3.7", "wfdb>=4.0"]
+dev = ["pytest>=7", "nbformat", "nbconvert", "matplotlib"]
+
+[tool.setuptools.packages.find]
+include = ["cardio_jepa*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::UserWarning", "ignore::FutureWarning"]
